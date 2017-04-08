@@ -1,0 +1,334 @@
+<?php include 'mainadd.php';?>
+<html>
+<head>
+<title></title>
+</head>
+<style>
+body{
+background-image: url("m.jpg");
+background-repeat: no-repeat;
+background-size: 1400px 800px;
+}
+</style>
+<script type="text/javascript" src="jquery.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+	var usr=<?php echo $username; ?>
+    var timerID = null;
+    var timerRunning = false;
+    var now = new Date();
+    var hours = 0;
+    var minutes =0;
+    var seconds =0;
+	function windowClose() {
+    window.location.reload();
+}
+    function stopclock ()
+    {
+    if(timerRunning)
+    clearTimeout(timerID);
+    timerRunning = false;
+    }
+     
+    function showtime ()
+    {
+    if(seconds>=59)
+    {
+    seconds=0;
+    minutes=minutes+1;
+    }
+    else
+    {
+    seconds=1+seconds;
+    }
+    if(minutes>=59)
+    {
+    minutes=0;
+    hours=hours+1;
+    }
+	if(seconds==30)
+	{
+	seconds=0;
+	window.alert("YOURE LATE!!! THE ZOMBIES HAVE GOT TO YOU!" );
+	}
+    var timeValue =zeroPad(hours,2)+":"+zeroPad(minutes,2)+":"+zeroPad(seconds,2);
+    document.getElementById("timeDisplay").innerHTML=timeValue;
+    timerID = setTimeout("showtime()",1000);
+    timerRunning = true;
+    }
+    function startclock()
+    {
+        stopclock();
+        showtime();
+    }
+    // End –>
+    function zeroPad(num,count)
+    {
+    var numZeropad = num + '';
+    while(numZeropad.length < count) {
+    numZeropad = "0" + numZeropad;
+    }
+    return numZeropad;
+    }
+        </script>
+		<script type="text/javascript" src="jquery.min.js"></script>
+
+    </head>
+
+<body onload="startclock();">
+	<div id="refresh"></div>
+       <h2 style="color: #000000; margin: left;">
+								TIME ELAPSED:: <span id="timeDisplay"></span>
+
+<canvas id="c1" width="1330" height="485" style="border: 2px solid black"> </canvas>
+<h2 id="status"></h2>
+<canvas id="c2" width="660" height="135" style="border: 2px solid black"> </canvas>
+<canvas id="c3" width="660" height="135" style="border: 2px solid black"> </canvas>
+<script>
+var score = 0;
+var c1=0;
+var c2=0;
+var c3=0;
+var c4=0;
+var c5=0;
+var c6=0;
+var objects=0;
+
+
+var img = new Image();
+img.onload = function() {
+    var ctx = document.getElementById('c1').getContext('2d');
+    ctx.drawImage(img, 0, 0, 1330, 490);	
+}
+img.src = 'lvl5.jpg';
+
+
+
+
+ var ctx1 = document.getElementById('c2').getContext('2d');
+ var ctx2 = document.getElementById('c3').getContext('2d');
+ ctx2.save();
+ ctx2.font = "900 20px Georgia";
+ ctx2.fillText("Score: "+score, 20, 50);
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PIECE 1", 20, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PIECE 2", 240, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PIECE 3", 450, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PIECE 4", 20, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PIECE 5", 240, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PIECE 6", 450, 120);
+
+
+
+//P1
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(10,20,150,50);
+
+//P2
+ctx1.fillStyle = 'rgba(0,255,0,.01)'; 
+ctx1.fillRect(230,20,150,50);
+
+//P3
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(430,20,150,50);
+
+//P4
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(10,80,150,50);
+
+
+//P5
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(230,80,150,50);
+
+//P6
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(430,80,150,50);
+
+ctx2.fillStyle = 'rgba(0,0,0,.01)';
+ctx2.fillRect(10,20,170,50);
+
+
+
+function initCanvas(){
+	var ctx = document.getElementById('c1').getContext('2d');
+	
+	ctx.canvas.addEventListener('mousedown', function(event) {
+    var mX= event.pageX - ctx.canvas.offsetLeft;
+	var mY= event.pageY - ctx.canvas.offsetTop;
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		if(mX >= b.x && mX < b.x+b.w && mY >= b.y && mY < b.y+b.h){
+		
+        document.getElementById('status').innerHTML = "You found the "+b.id;
+			if(b.id=="PIECE 1")
+			{
+			if(c1 == 0)
+			{
+			score=score+20;
+			c1=c1+1;
+			objects=objects+1;
+			}
+			ctx1.clearRect(10,20,150,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			} 
+			
+            else if(b.id=="PIECE 2")
+			{
+			if(c2 == 0)
+			{
+			objects=objects+1;
+			score=score+1;
+			c2=c2+1;
+			}
+			ctx1.clearRect(230,20,150,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+
+			} 
+
+			else if(b.id=="PIECE 3")
+			{
+			if(c3 == 0)
+			{
+			score=score+20;
+			c3=c3+1;
+			objects=objects+1;
+			}
+			ctx1.clearRect(430,20,150,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			} 
+			
+			else if(b.id=="PIECE 4")
+			{
+			if(c4 == 0)
+			{
+			objects=objects+1;
+			score=score+20;
+			c4=c4+1;
+			}
+			ctx1.clearRect(10,80,170,150);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+		    } 
+
+			else if(b.id=="PIECE 5")
+			{
+			if(c5 == 0)
+			{
+			objects=objects+1;
+			score=score+20;
+			c5=c5+1;
+			}
+			ctx1.clearRect(230,80,150,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			}
+			
+			else if(b.id=="PIECE 6")
+			{
+			if(c6 == 0)
+			{
+			objects=objects+1;
+			score=score+1;
+			c6=c6+1;
+			}
+			ctx1.clearRect(430,80,150,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+
+			}
+
+
+			
+			
+		}
+		
+		if(objects == 6)
+		{
+var end=getTime();/////////
+		    var dif=end-start;/////////
+			var ajaxdata = "score="+score+"&usr="+username+"&time"+dif;//////
+						objects = 0;
+			alert(ajaxdata);
+			$.ajax({
+	    		url: "r5chk.php",
+	    		type: "POST",
+	    		data: ajaxdata,
+	    		success: function(data){
+	    			//alert(data); //use to debug
+	        		$('#refresh').load("r5chk.php");
+	        		window.location.href='level6.html';
+	    		}
+			});
+			
+		}
+	}
+	});
+	
+	var buildings = [ {"id":"PIECE 1","x":1260,"y":260,"w":70,"h":30,"bg":"magenta"},
+					  {"id":"PIECE 2","x":1023,"y":420,"w":30,"h":30,"bg":"green"},
+					  {"id":"PIECE 3","x":1260,"y":40,"w":100,"h":35,"bg":"yellow"},
+					  {"id":"PIECE 4","x":37,"y":460,"w":58,"h":32,"bg":"BLUE"},
+					  {"id":"PIECE 5","x":160,"y":150,"w":75,"h":50,"bg":"RED"},										  					 
+                      {"id":"PIECE 6","x":835,"y":228,"w":75,"h":25,"bg":"ORANGE"}
+
+
+
+	];
+	
+		
+	
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		ctx.fillStyle = b.bg;
+		ctx.globalAlpha=0.01;
+
+		ctx.fillRect(b.x,b.y,b.w,b.h);
+		
+		
+
+		
+		
+
+	}
+}
+
+window.addEventListener('load', function(event) {
+    initCanvas();
+});
+</script>
+</body>
+</html>
+
+
+

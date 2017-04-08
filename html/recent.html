@@ -1,0 +1,279 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<canvas id="c1" width="1330" height="485" style="border: 2px solid black"> </canvas>
+<h2 id="status"></h2>
+<canvas id="c2" width="660" height="135" style="border: 2px solid black"> </canvas>
+<canvas id="c3" width="660" height="135" style="border: 2px solid black"> </canvas>
+<script>
+
+var img = new Image();
+img.onload = function() {
+    var ctx = document.getElementById('c1').getContext('2d');
+    ctx.drawImage(img, 0, 0, 1330, 490);	
+}
+img.src = 'l1.jpg';
+
+
+var img1 = new Image();
+img1.onload = function() {
+    var ctx = document.getElementById('c2').getContext('2d');
+    ctx.drawImage(img1, 0, 0, 660, 135);	
+	
+var ctx1 = document.getElementById('c2').getContext('2d');
+
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(10,20,120,50);
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(140,20,120,50);
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(280,20,120,50);
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(10,80,160,150);
+
+
+
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(360,80,160,150);
+
+ctx1.fillRect(180,80,150,150);
+
+ctx1.fillStyle = 'rgba(0,0,0,.7)';
+
+
+
+
+
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SYRINGE", 20, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("COTTON", 150, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SCISSORS", 290, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PAINKILLERS", 10, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("BAND-AID", 185, 120);
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("DETTOL", 380, 120);
+	
+	
+	
+	
+	
+}
+img1.src = 'images.jpg';
+
+
+
+
+
+
+
+
+
+/*
+var ctx1 = document.getElementById('c2').getContext('2d');
+
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(10,20,120,50);
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(140,20,120,50);
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(280,20,120,50);
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(10,80,160,150);
+
+
+
+
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(360,80,160,150);
+
+ctx1.fillRect(180,80,150,150);
+
+ctx1.fillStyle = 'rgba(0,0,0,.7)';
+
+
+
+
+
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SYRINGE", 20, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("COTTON", 150, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SCISSORS", 290, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PAINKILLERS", 10, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("BAND-AID", 185, 120);
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("DETTOL", 380, 120);
+
+*/
+
+
+
+/*
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SYRINGE", 20, 50);
+ctx1.fillStyle = 'rgba(255,0,0,.7)';
+ctx1.fillRect(10,20,120,50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("COTTON", 150, 50);
+ctx1.fillStyle = 'rgba(0,255,0,.7)';
+ctx1.fillRect(140,20,120,50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SCISSORS", 290, 50);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(280,20,120,50);
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PAINKILLERS", 10, 120);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(10,80,160,150);
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("DETTOL", 380, 120);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(360,80,160,150);
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("BAND-AID", 185, 120);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(180,80,150,150);
+*/
+
+
+function initCanvas(){
+	var ctx = document.getElementById('c1').getContext('2d');
+	
+	ctx.canvas.addEventListener('mousedown', function(event) {
+    var mX= event.clientX - ctx.canvas.offsetLeft;
+	var mY= event.clientY - ctx.canvas.offsetTop;
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		if(mX >= b.x && mX < b.x+b.w && mY >= b.y && mY < b.y+b.h){
+		
+        document.getElementById('status').innerHTML = "You found the "+b.id;
+		
+			if(b.id=="SYRINGE")
+			
+			{
+			ctx1.clearRect(10,20,120,50);
+			} 
+			
+             if (b.id=="COTTON")
+			{
+			ctx1.clearRect(140,20,120,50);
+			} 
+			
+		   else if(b.id=="SCISSORS")
+			{
+			ctx1.clearRect(280,20,120,50);
+			} 
+			
+           
+		   else if(b.id=="DETTOL")
+			{
+			ctx1.clearRect(360,80,160,150);
+			} 
+			
+			else if(b.id=="PAINKILLERS")
+			{
+			ctx1.clearRect(10,80,160,150);
+		    } 
+			
+		   else if(b.id=="BAND-AID")
+			{
+			ctx1.clearRect(180,80,150,150);
+		
+			} 
+			
+		
+			
+			
+			
+		
+			
+		}
+	}
+	});
+	
+	var buildings = [ {"id":"COTTON","x":1068,"y":215,"w":80,"h":60,"bg":"magenta"},
+					  {"id":"PAINKILLERS","x":1077,"y":440,"w":80,"h":40,"bg":"green"},
+					  {"id":"SCISSORS","x":450,"y":290,"w":100,"h":35,"bg":"yellow"},
+					  {"id":"BAND-AID","x":250,"y":325,"w":58,"h":40,"bg":"BLUE"},
+					  {"id":"DETTOL","x":215,"y":210,"w":50,"h":50,"bg":"RED"},										  					 
+                      {"id":"SYRINGE","x":725,"y":240,"w":65,"h":25,"bg":"ORANGE"}
+
+
+
+	];
+	
+		
+	
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		ctx.fillStyle = b.bg;
+		ctx.globalAlpha=0.01;
+
+		ctx.fillRect(b.x,b.y,b.w,b.h);
+		
+		
+
+		
+		
+
+	}
+}
+
+window.addEventListener('load', function(event) {
+    initCanvas();
+});
+</script>
+</body>
+</html>
+
+
+

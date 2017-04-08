@@ -1,0 +1,53 @@
+<?php 
+include 'connect.php';
+$total=null;
+$sql="SELECT time FROM level1 WHERE tk_username='melisha' ";
+$result=mysql_query($sql) or die(mysql_error());
+$row=mysql_fetch_array($result);
+$total+=$row[2];
+
+$sql1="SELECT time FROM level2 WHERE tk_username='melisha' ";
+$result1=mysql_query($sql) or die(mysql_error());
+$row2=mysql_fetch_array($result1);
+$total+=$row2[2];
+?>
+<html>
+<head>
+<style>
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center; line-height: 50px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 22px;
+    margin: 2px 2px;
+    cursor: pointer;
+	height:50px;
+	width:250px;
+	margin-left:570px
+}
+h1 {
+text-align : center;
+}
+
+body{
+background-image: url("final.jpg");
+background-repeat: no-repeat;
+background-size: 1400px 680px;}
+</style>
+</head>
+<body>
+<font size="3" ><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<h1>Thankyou for playing Camoflauge!! <br>
+We hope you enjoyed the game! </h1>
+
+</p>
+<a href="main.html" class="button">HOME</a>
+
+</body>
+</html>
+
+
+

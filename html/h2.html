@@ -1,0 +1,167 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<h2 id="status"></h2>
+<canvas id="c1" width="1330" height="490" style="border: 2px solid black"> </canvas>
+<canvas id="c2" width="660" height="145" style="border: 2px solid black"> </canvas>
+<canvas id="c3" width="660" height="145" style="border: 2px solid black"> </canvas>
+
+
+<script>
+
+var can = document.getElementById('c1');
+var ctx = can.getContext('2d');
+
+ctx.fillStyle = 'rgba(255,0,0,.4)';
+ctx.fillRect(20,20,100,80);
+
+ctx.fillStyle = 'rgba(0,0,255,.4)';
+ctx.fillRect(100,50,100,100);
+
+
+ctx.fillStyle = 'rgba(0,255,0,.4)';
+ctx.fillRect(650,20,100,80);
+
+
+ctx.fillStyle = 'rgba(0,255,0,.4)';
+ctx.fillRect(1000,20,200,1000);
+
+
+
+
+  
+
+  ctx.beginPath();
+  ctx.fillStyle = "red";
+  ctx.arc(300, 200, 100, 0, Math.PI * 0.5, 1);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.fillStyle = "blue";
+  ctx.arc(900, 100, 100, 120, Math.PI * 2, 1);
+  ctx.fill();
+
+
+
+
+ var ctx1 = document.getElementById('c2').getContext('2d');
+
+ctx1.font = "20px Georgia";
+ctx1.fillText("CLOCK", 10, 50);
+ctx1.fillStyle = 'rgba(255,0,0,.4)';
+ctx1.fillRect(10,20,120,50);
+
+
+
+ var ctx2 = document.getElementById('c2').getContext('2d');
+
+ctx2.font = "20px Georgia";
+ctx2.fillText("WATER", 200, 50);
+ctx2.fillStyle = 'rgba(255,0,0,.4)';
+ctx2.fillRect(200,20,120,50);
+
+
+
+var ctx3 = document.getElementById('c2').getContext('2d');
+
+ctx2.font = "20px Georgia";
+ctx2.fillText("SHELTER", 400, 50);
+ctx2.fillStyle = 'rgba(255,0,0,.4)';
+ctx2.fillRect(400,20,120,50);
+
+
+
+
+
+
+function initCanvas(){
+    var ctx = document.getElementById('c1').getContext('2d');
+    ctx.canvas.addEventListener('mousedown', function(event) {
+        var mX = event.clientX - ctx.canvas.offsetLeft;
+        var mY = event.clientY - ctx.canvas.offsetTop;
+        for(var i = 0; i < build.length; i++){
+            var b = build[i];
+            if(mX >= b.x && mX < b.x+b.w && mY >= b.y && mY < b.y+b.h){
+                document.getElementById('status').innerHTML = "You touched "+b.id;
+				
+				
+				
+			
+
+			
+			
+			
+if(b.id=="clock" && b.id !="water")
+{
+ctx1.clearRect(10,20,120,50);
+}  
+else 
+
+if(b.id=="water" && b.id!="clock")
+{
+ctx2.clearRect(200,20,120,50);
+}  
+			
+				
+else
+if(b.id=="shelter" && b.id!="clock"&& b.id !="water")
+{
+
+ctx3.clearRect(400,20,120,50);
+
+}				
+				
+			
+				
+							
+  }
+		}
+    });
+	
+	
+	
+	
+	
+	
+ 
+	
+	
+	
+	
+	
+    var build = [ {"id":"clock","x":700,"y":200,"w":75,"h":100,"bg":"magenta"},
+                      {"id":"water","x":900,"y":200,"w":180,"h":200,"bg":"magenta"},
+                      {"id":"shelter","x":800,"y":200,"w":50,"h":50,"bg":"magenta"},
+
+    ];
+    for(var i = 0; i < build.length; i++){
+        var b = build[i];
+        ctx.fillStyle = b.bg;
+        ctx.fillRect(b.x,b.y,b.w,b.h);
+		
+		
+	
+		
+		
+		
+		
+    }
+	
+	
+	
+	
+}
+window.addEventListener('load', function(event) {
+    initCanvas();
+}
+);
+</script>
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,34 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+
+<canvas id="c1" width="1330" height="490" style="border: 2px solid black"> </canvas>
+<canvas id="c2" width="660" height="145" style="border: 2px solid black"> </canvas>
+<canvas id="c3" width="660" height="145" style="border: 2px solid black"> </canvas>
+<script>
+var img = new Image();
+img.onload = function() {
+    var ctx = document.getElementById('c1').getContext('2d');
+    ctx.drawImage(img, 0, 0, 1330, 490);	
+}
+img.src = 'dog-7.jpg';
+
+
+
+ var ctx1 = document.getElementById('c2').getContext('2d');
+
+ctx1.font = "20px Georgia";
+ctx1.fillText("Hello World!", 10, 50);
+ctx1.fillStyle = 'rgba(255,0,0,.4)';
+ctx1.fillRect(10,20,120,50);
+
+</script>
+
+
+</body>
+</html>
+
+
+

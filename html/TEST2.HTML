@@ -1,0 +1,273 @@
+
+
+
+<html>
+<head>
+<title></title>
+</head>
+<style>
+body{
+background-image: url("bg2.jpg");
+background-repeat: no-repeat;
+background-size: 1400px 800px;
+}
+</style>
+<script language="javascript" type="text/javascript">
+    var timerID = null;
+    var timerRunning = false;
+    var now = new Date();
+    var hours = 0;
+    var minutes =0;
+    var seconds =0
+    function stopclock ()
+    {
+    if(timerRunning)
+    clearTimeout(timerID);
+    timerRunning = false;
+    }
+     
+    function showtime ()
+    {
+    if(seconds>=59)
+    {
+    seconds=0;
+    minutes=minutes+1;
+    }
+    else
+    {
+    seconds=1+seconds;
+    }
+    if(minutes>=59)
+    {
+    minutes=0;
+    hours=hours+1;
+    }
+	if(seconds==5)
+	{
+	seconds=0;
+	window.alert("YOU'RE LATE!!! THE ZOMBIES HAVE GOT TO YOU!" );
+	}
+    var timeValue =zeroPad(hours,2)+":"+zeroPad(minutes,2)+":"+zeroPad(seconds,2);
+    document.getElementById("timeDisplay").innerHTML=timeValue;
+    timerID = setTimeout("showtime()",1000);
+    timerRunning = true;
+    }
+    function startclock()
+    {
+        stopclock();
+        showtime();
+    }
+    // End –>
+    function zeroPad(num,count)
+    {
+    var numZeropad = num + '';
+    while(numZeropad.length < count) {
+    numZeropad = "0" + numZeropad;
+    }
+    return numZeropad;
+    }
+        </script>
+    </head>
+
+<body onload="startclock();">
+
+       <h2 style="color: #000000; margin: left;">
+								TIME ELAPSED:: <span id="timeDisplay"></span>
+								<canvas id="c1" width="1330" height="485" style="border: 2px solid black"> </canvas>
+<h2 id="status"></h2>
+<canvas id="c2" width="660" height="135" style="border: 2px solid black"> </canvas>
+<canvas id="c3" width="660" height="135" style="border: 2px solid black"> </canvas>
+<scripT>
+
+var img = new Image();
+img.onload = function() {
+    var ctx = document.getElementById('c1').getContext('2d');
+    ctx.drawImage(img, 0, 0, 1330, 490);	
+}
+img.src = 'l1.jpg';
+
+
+
+
+ var ctx1 = document.getElementById('c2').getContext('2d');
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SYRINGE", 20, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("COTTON", 240, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SCISSORS", 450, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PAINKILLERS", 20, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("BAND-AID", 240, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("DETTOL", 450, 120);
+
+
+
+//Syringe
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(10,20,170,50);
+
+//cotton
+ctx1.fillStyle = 'rgba(0,0,0,.01)'; 
+ctx1.fillRect(230,20,150,50);
+
+//Scissors
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(430,20,150,50);
+
+//Painkillers
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(10,80,170,150);
+
+
+//Bandaid
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(230,80,150,150);
+
+//Dettol
+ctx1.fillStyle = 'rgba(0,0,0,.01)';
+ctx1.fillRect(430,80,150,150);
+
+
+
+
+
+
+
+
+
+
+/*
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SYRINGE", 20, 50);
+ctx1.fillStyle = 'rgba(255,0,0,.7)';
+ctx1.fillRect(10,20,120,50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("COTTON", 150, 50);
+ctx1.fillStyle = 'rgba(0,255,0,.7)';
+ctx1.fillRect(140,20,120,50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SCISSORS", 290, 50);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(280,20,120,50);
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("PAINKILLERS", 10, 120);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(10,80,160,150);
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("DETTOL", 380, 120);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(360,80,160,150);
+
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("BAND-AID", 185, 120);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(180,80,150,150);
+*/
+
+
+function initCanvas(){
+	var ctx = document.getElementById('c1').getContext('2d');
+	
+	ctx.canvas.addEventListener('mousedown', function(event) {
+    var mX= event.clientX - ctx.canvas.offsetLeft;
+	var mY= event.clientY - ctx.canvas.offsetTop;
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		if(mX >= b.x && mX < b.x+b.w && mY >= b.y && mY < b.y+b.h){
+		
+        document.getElementById('status').innerHTML = "You found the "+b.id;
+			if(b.id=="SYRINGE")
+			{
+			ctx1.clearRect(10,20,170,50);
+			} 
+			
+            else if(b.id=="COTTON")
+			{
+			ctx1.clearRect(230,20,150,50);
+
+			} 
+
+			else if(b.id=="SCISSORS")
+			{
+			ctx1.clearRect(430,20,150,50);
+			} 
+			
+			else if(b.id=="PAINKILLERS")
+			{
+			ctx1.clearRect(10,80,170,150);
+		    } 
+
+			else if(b.id=="BAND-AID")
+			{
+			ctx1.clearRect(230,80,150,150);
+			}
+			
+
+
+			else if(b.id=="DETTOL")
+			{
+			ctx1.clearRect(430,80,150,150);
+			} 
+			
+		}
+	}
+	});
+	
+	var buildings = [ {"id":"COTTON","x":1068,"y":215,"w":80,"h":60,"bg":"magenta"},
+					  {"id":"PAINKILLERS","x":1077,"y":440,"w":80,"h":40,"bg":"green"},
+					  {"id":"SCISSORS","x":450,"y":290,"w":100,"h":35,"bg":"yellow"},
+					  {"id":"BAND-AID","x":250,"y":325,"w":58,"h":40,"bg":"BLUE"},
+					  {"id":"DETTOL","x":215,"y":210,"w":50,"h":50,"bg":"RED"},										  					 
+                      {"id":"SYRINGE","x":725,"y":240,"w":65,"h":25,"bg":"ORANGE"}
+
+
+
+	];
+	
+		
+	
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		ctx.fillStyle = b.bg;
+		ctx.globalAlpha=0.01;
+
+		ctx.fillRect(b.x,b.y,b.w,b.h);
+		
+		
+
+		
+		
+
+	}
+}
+
+window.addEventListener('load', function(event) {
+    initCanvas();
+});
+</script>
+</body>
+</html>
+

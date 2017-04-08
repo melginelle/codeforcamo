@@ -1,0 +1,396 @@
+<?php
+// Start the session
+session_start();
+$_SESSION["obj"]=0;
+?>
+<html>
+<head>
+<title></title>
+</head>
+<style>
+body{
+background-image: url("m.jpg");
+background-repeat: no-repeat;
+background-size: 1400px 800px;
+}
+</style>
+
+<script language="javascript" type="text/javascript">
+    var timerID = null;
+    var timerRunning = false;
+    var now = new Date();
+    var hours = 0;
+    var minutes =0;
+    var seconds =0;
+	function windowClose() {
+    window.location.reload();
+}
+    function stopclock ()
+    {
+    if(timerRunning)
+    clearTimeout(timerID);
+    timerRunning = false;
+    }
+     
+    function showtime ()
+    {
+    if(seconds>=59)
+    {
+    seconds=0;
+    minutes=minutes+1;
+    }
+    else
+    {
+    seconds=1+seconds;
+    }
+    if(minutes>=59)
+    {
+    minutes=0;
+    hours=hours+1;
+    }
+	if(seconds==30)
+	{
+	seconds=0;
+	window.alert("YOURE LATE!!! THE ZOMBIES HAVE GOT TO YOU!" );
+	}
+    var timeValue =zeroPad(hours,2)+":"+zeroPad(minutes,2)+":"+zeroPad(seconds,2);
+    document.getElementById("timeDisplay").innerHTML=timeValue;
+    timerID = setTimeout("showtime()",1000);
+    timerRunning = true;
+    }
+    function startclock()
+    {
+        stopclock();
+        showtime();
+    }
+    // End –>
+    function zeroPad(num,count)
+    {
+    var numZeropad = num + '';
+    while(numZeropad.length < count) {
+    numZeropad = "0" + numZeropad;
+    }
+    return numZeropad;
+    }
+        </script>
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body onload="startclock();">
+	
+       <h2 style="color: #000000; margin: left;">
+								TIME ELAPSED:: <span id="timeDisplay"></span>
+
+
+<canvas id="c1" width="1330" height="485" style="border: 2px solid black"> </canvas>
+<h2 id="status"></h2>
+<canvas id="c2" width="660" height="135" style="border: 2px solid black"> </canvas>
+<canvas id="c3" width="660" height="135" style="border: 2px solid black"> </canvas>
+<script>
+var score = 0;
+var c1=0;
+var c2=0;
+var c3=0;
+var c4=0;
+var c5=0;
+var c6=0;
+var c7=0;
+var img = new Image();
+img.onload = function() {
+    var ctx = document.getElementById('c1').getContext('2d');
+    ctx.drawImage(img, 0, 0, 1330, 490);	
+}
+img.src = 'lvl2.jpg';
+
+
+ var ctx1 = document.getElementById('c2').getContext('2d');
+
+var ctx2 = document.getElementById('c3').getContext('2d');
+ ctx2.save();
+ ctx2.font = "900 20px Georgia";
+ ctx2.fillText("Score: "+score, 20, 50);
+
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("BREAD", 20, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("WATER", 170, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("TORCH", 350, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("NAPKINS", 550, 50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("CANNED FOOD", 20, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("SHOPPING CART", 240, 120);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("ENERGY BAR", 490, 120);
+
+
+
+
+
+//BREAD
+ctx1.fillStyle = 'rgba(255,0,0,.01)';
+ctx1.fillRect(10,20,90,50);
+
+//WATER
+ctx1.fillStyle = 'rgba(0,255,0,.01)'; 
+ctx1.fillRect(170,30,140,50);
+
+//TORCH
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(350,30,150,50);
+
+//NAPKINS
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(550,30,150,50);
+
+
+//CANNED FOOD
+ctx1.fillStyle = 'rgba(0,255,0,.01)';
+ctx1.fillRect(20,90,165,50);
+
+
+//SHOPPING CART
+ctx1.fillStyle = 'rgba(255,0,0,.01)';
+ctx1.fillRect(230,90,200,90);
+
+
+//ENERGY BARS
+ctx1.fillStyle = 'rgba(255,0,0,.01)';
+ctx1.fillRect(490,90,200,90);
+
+
+ctx2.fillStyle = 'rgba(0,0,0,.01)';
+ctx2.fillRect(10,20,170,50);
+
+
+
+
+
+
+
+
+function initCanvas(){
+	var ctx = document.getElementById('c1').getContext('2d');
+	
+	ctx.canvas.addEventListener('mousedown', function(event) {
+    var mX= event.pageX - ctx.canvas.offsetLeft;
+	var mY= event.pageY - ctx.canvas.offsetTop;
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		if(mX >= b.x && mX < b.x+b.w && mY >= b.y && mY < b.y+b.h){
+		
+        document.getElementById('status').innerHTML = "You found the "+b.id;
+			if(b.id=="BREAD")
+			{
+			if(c1 == 0)
+			{
+			score=score+20;
+			c1=c1+1;
+			}
+			ctx1.clearRect(10,20,90,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			} 
+			
+            else if(b.id=="WATER")
+			{
+			if(c2 == 0)
+			{
+			score=score+20;
+			c2=c2+1;
+			}
+			ctx1.clearRect(170,30,140,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+
+			} 
+
+			else if(b.id=="TORCH")
+			{
+			if(c3 == 0)
+			{
+			score=score+20;
+			c3=c3+1;
+			}
+			ctx1.clearRect(350,30,150,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			} 
+			
+			else if(b.id=="NAPKINS")
+			{
+			if(c4 == 0)
+			{
+			score=score+20;
+			c4=c4+1;
+			}
+			ctx1.clearRect(550,30,150,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+		    } 
+
+			else if(b.id=="CANNED FOOD")
+			{
+			if(c5 == 0)
+			{
+			score=score+20;
+			c5=c5+1;
+			}
+			ctx1.clearRect(20,90,165,50);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			}
+			
+
+
+			else if(b.id=="SHOPPING CART")
+			{
+			if(c6 == 0)
+			{
+			score=score+30;
+			c6=c6+1;
+			}
+			ctx1.clearRect(230,90,200,90);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			} 
+			
+			
+			else if(b.id=="ENERGY BAR")
+			{
+			if(c7 == 0)
+			{
+			score=score+20;
+			c7=c7+1;
+			}
+			ctx1.clearRect(490,90,200,90);
+			ctx2.clearRect(10,20,170,50);
+			ctx2.restore();
+			ctx2.font = "900 20px Georgia";
+			ctx2.fillText("Score: "+score, 20, 50);
+			} 
+			
+		}
+		if(objects == 7)
+		{
+			var ajaxdata = "score="+score+"&objects="+objects;
+			objects = 0;
+			//alert(ajaxdata);
+			$.ajax({
+	    		url: "r2chk.php",
+	    		type: "POST",
+	    		data: ajaxdata,
+	    		success: function(data){
+	    			//alert(data); //use to debug
+	        		$('#refresh').load("r2chk.php");
+	        		window.location.href='level3.html';
+	    		}
+			});
+			
+		}
+	}
+	});
+	
+	var buildings = [ {"id":"BREAD","x":1040,"y":295,"w":50,"h":40,"bg":"magenta"}, 
+					  {"id":"WATER","x":353,"y":245,"w":40,"h":40,"bg":"green"},
+					  {"id":"TORCH","x":563,"y":448,"w":55,"h":40,"bg":"yellow"},
+					  {"id":"NAPKINS","x":178,"y":380,"w":100,"h":90,"bg":"BLUE"},
+					  {"id":"CANNED FOOD","x":540,"y":173,"w":50,"h":40,"bg":"RED"},										  					 
+                      {"id":"SHOPPING CART","x":965,"y":159,"w":95 ,"h":50,"bg":"ORANGE"},
+					  {"id":"ENERGY BAR","x":1283,"y":415,"w":40,"h":57,"bg":"white"}
+
+
+
+
+	];
+	
+		
+	
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		ctx.fillStyle = b.bg;
+		ctx.globalAlpha=0.01;
+
+		ctx.fillRect(b.x,b.y,b.w,b.h);
+		
+		
+
+		
+		
+
+	}
+}
+
+window.addEventListener('load', function(event) {
+    initCanvas();
+
+});
+
+
+</script>
+
+
+
+<script>
+if(obj ==6){
+			var ajaxdata = "score="+obj;
+			$.ajax({
+	    		url: "r1chk.php",
+	    		type: "POST",
+	    		data: ajaxdata,
+	    		success: function(data){
+	    			//alert(data); //use to debug
+	        		$('#refresh').load("r1chk.php");
+	    		}
+			});
+		}
+		</script>
+		<div id="refresh"></div>
+
+</body>
+</html>
+
+
+

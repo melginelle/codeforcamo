@@ -1,0 +1,90 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<canvas id="c1" width="1330" height="420" style="border: 2px solid black"> </canvas>
+<h2 id="status"></h2>
+<canvas id="c2" width="660" height="135" style="border: 2px solid black"> </canvas>
+<canvas id="c3" width="660" height="135" style="border: 2px solid black"> </canvas>
+<script>
+
+var img = new Image();
+img.onload = function() {
+    var ctx = document.getElementById('c1').getContext('2d');
+    ctx.drawImage(img, 0, 0, 1330, 490);	
+}
+img.src = 'dog-7.jpg';
+
+
+var ctx1 = document.getElementById('c2').getContext('2d');
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("Rock", 20, 50);
+ctx1.fillStyle = 'rgba(255,0,0,.7)';
+ctx1.fillRect(10,20,120,50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("Paper", 150, 50);
+ctx1.fillStyle = 'rgba(0,255,0,.7)';
+ctx1.fillRect(140,20,120,50);
+
+ctx1.font = "900 20px Georgia";
+ctx1.fillText("Scissors", 290, 50);
+ctx1.fillStyle = 'rgba(0,0,255,.7)';
+ctx1.fillRect(280,20,120,50);
+
+
+function initCanvas(){
+	var ctx = document.getElementById('c1').getContext('2d');
+	
+	ctx.canvas.addEventListener('mousedown', function(event) {
+    var mX= event.clientX - ctx.canvas.offsetLeft;
+	var mY= event.clientY - ctx.canvas.offsetTop;
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		if(mX >=b.x && mX < b.x+b.w && mY >= b.y && mY < b.y+b.h){
+			document.getElementById('status').innerHTML="You Touched "+b.id;
+			if(b.id=="Rock")
+			{
+			ctx1.clearRect(10,20,120,50);
+			}  
+			if(b.id=="Paper")
+			{
+			ctx1.clearRect(140,20,120,50);
+			}  
+			if(b.id=="Scissor")
+			{
+			ctx1.clearRect(280,20,120,50);
+			}  
+		}
+	}
+	});
+	
+	var buildings = [ {"id":"Rock","x":100,"y":100,"w":200,"h":200,"bg":"magenta"},
+					  {"id":"Paper","x":400,"y":100,"w":200,"h":200,"bg":"green"},
+					  {"id":"Scissor","x":700,"y":100,"w":200,"h":200,"bg":"yellow"}
+	];
+	
+	for(var i = 0; i < buildings.length; i++){
+		var b = buildings[i];
+		ctx.fillStyle = 'rgba(0,0,255,.0)';
+		ctx.fillRect(b.x,b.y,b.w,b.h);
+		
+		
+
+		
+		
+
+	}
+}
+
+window.addEventListener('load', function(event) {
+    initCanvas();
+});
+</script>
+</body>
+</html>
+
+
+
